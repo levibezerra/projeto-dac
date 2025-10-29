@@ -1,5 +1,6 @@
 package com.levi.easy_delivery.entity;
 
+import com.levi.easy_delivery.enums.StatusPedido;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,29 +12,26 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "item_pedidos")
-public class ItemPedido {
+@Table(name = "pedidos")
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "quantidade_pedidos", nullable = false)
-    private int quantidade;
+    @Column(name = "valor_total", nullable = false, columnDefinition = "decimal(7,2)")
+    private BigDecimal valorTotal;
 
-    @Column(name = "preco_unitario", nullable = false, columnDefinition = "decimal(7,2)")
-    private BigDecimal precoUnitario;
+    @Column(name = "endereco_de_entrega", nullable = false, length = 100)
+    private String enderecoEntraga;
 
-    @Column(name = "sub_total", nullable = false, columnDefinition = "decimal(7,2)")
-    private BigDecimal subTotal;
-
-    @ManyToOne
-    @JoinColumn(name = "prato_id", nullable = false)
-    private Prato prato;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_pedido", nullable = false, length = 25)
+    private StatusPedido status;
 
     @ManyToOne
-    @JoinColumn(name = "pedido-id", nullable = false)
-    private Pedido pedido;
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
 
     @CreatedDate
     @Column(name = "data_de_criacao")
@@ -54,8 +52,8 @@ public class ItemPedido {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        ItemPedido that = (ItemPedido) o;
-        return Objects.equals(id, that.id);
+        Pedido pedido = (Pedido) o;
+        return Objects.equals(id, pedido.id);
     }
 
     @Override
