@@ -1,6 +1,6 @@
 package com.levi.easy_delivery.entity;
 
-import com.levi.easy_delivery.enums.StatusPedido;
+import com.levi.easy_delivery.enums.TipoDePagamento;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,30 +12,23 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "pedidos")
-public class Pedido {
+@Table(name = "pagamentos")
+public class Pagamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "valor_total", nullable = false, columnDefinition = "decimal(7,2)")
-    private BigDecimal valorTotal;
-
-    @Column(name = "endereco_de_entrega", nullable = false, length = 100)
-    private String enderecoEntraga;
+    @Column(name = "valor", nullable = false, columnDefinition = "decimal(7,2)")
+    private BigDecimal valor;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_pedido", nullable = false, length = 25)
-    private StatusPedido status;
+    @Column(name = "tipo_de_pagamento", nullable = false, length = 25)
+    private TipoDePagamento tipoDePagamento;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
-
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
-    @JoinColumn(name = "pagamento_id", nullable = false, unique = true)
-    private Pagamento pagamento;
+    @OneToOne
+    @JoinColumn(name = "pedido_id", nullable = false, unique = true)
+    private Pedido pedido;
 
     @CreatedDate
     @Column(name = "data_de_criacao")
@@ -56,8 +49,8 @@ public class Pedido {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
-        return Objects.equals(id, pedido.id);
+        Pagamento pagamento = (Pagamento) o;
+        return Objects.equals(id, pagamento.id);
     }
 
     @Override
