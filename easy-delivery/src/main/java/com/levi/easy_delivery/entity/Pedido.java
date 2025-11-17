@@ -23,7 +23,7 @@ public class Pedido {
     private BigDecimal valorTotal;
 
     @Column(name = "endereco_de_entrega", nullable = false, length = 100)
-    private String enderecoEntraga;
+    private String enderecoEntrega;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_pedido", nullable = false, length = 25)
