@@ -4,6 +4,7 @@ import com.levi.easy_delivery.entity.Usuario;
 import com.levi.easy_delivery.service.UsuarioService;
 import com.levi.easy_delivery.web.dto.UsuarioCreateDto;
 import com.levi.easy_delivery.web.dto.UsuarioResponseDto;
+import com.levi.easy_delivery.web.dto.UsuarioSenhaDto;
 import com.levi.easy_delivery.web.dto.mapper.UsuarioMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,9 +33,9 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> updatePassword(@PathVariable Long id, @RequestBody Usuario usuario) {
-        Usuario user = usuarioService.editarSenha(id, usuario.getSenha());
-        return ResponseEntity.ok(user);
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UsuarioSenhaDto dto) {
+        Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getNovaSenha(), dto.getConfirmaSenha());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
