@@ -1,6 +1,7 @@
 package com.levi.easy_delivery.service;
 
 import com.levi.easy_delivery.entity.Usuario;
+import com.levi.easy_delivery.exception.EntityNotFoundException;
 import com.levi.easy_delivery.exception.UserNameUniqueViolationException;
 import com.levi.easy_delivery.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Usuáro não encontrado!.")
+                () -> new EntityNotFoundException(String.format("Usuáro id=%s não encontrado!", id))
         );
     }
 
