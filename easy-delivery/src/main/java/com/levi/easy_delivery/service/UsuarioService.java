@@ -1,8 +1,10 @@
 package com.levi.easy_delivery.service;
 
 import com.levi.easy_delivery.entity.Usuario;
+import com.levi.easy_delivery.exception.UserNameUniqueViolationException;
 import com.levi.easy_delivery.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +18,11 @@ public class UsuarioService {
 
     @Transactional
     public Usuario salvar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        try {
+            return usuarioRepository.save(usuario);
+        } catch (DataIntegrityViolationException ex) {
+            throw new UserNameUniqueViolationException(String.format("E-mail {%s} já cadastrado!", usuario.getEmail()));
+        }
     }
 
     @Transactional(readOnly = true)
