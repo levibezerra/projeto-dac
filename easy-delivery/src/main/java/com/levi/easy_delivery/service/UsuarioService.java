@@ -8,6 +8,7 @@ import com.levi.easy_delivery.exception.UsernameUniqueViolationException;
 import com.levi.easy_delivery.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +19,12 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public Usuario salvar(Usuario usuario) {
         try {
+            usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
             return usuarioRepository.save(usuario);
         } catch (DataIntegrityViolationException ex) {
             throw new UsernameUniqueViolationException(String.format("E-mail {%s} já cadastrado!", usuario.getEmail()));
@@ -41,10 +44,10 @@ public class UsuarioService {
             throw new PasswordInvalidException("Nova senha não confere com a confirmação de senha!");
         }
         Usuario user = buscarPorId(id);
-        if (!user.getSenha().equals(senhaAtual)) {
+        if (!passwordEncoder.matches(senhaAtual, user.getSenha())) {
             throw new PasswordInvalidException("Sua senha não confere!");
         }
-        user.setSenha(novaSenha);
+        user.setSenha(passwordEncoder.encode(novaSenha));
         return user;
     }
 
