@@ -2,11 +2,14 @@ package com.levi.easy_delivery.web.controller;
 
 import com.levi.easy_delivery.entity.Cliente;
 import com.levi.easy_delivery.jwt.JwtUserDetails;
+import com.levi.easy_delivery.repository.projection.ClienteProjection;
 import com.levi.easy_delivery.service.ClienteService;
 import com.levi.easy_delivery.service.UsuarioService;
 import com.levi.easy_delivery.web.dto.ClienteCreateDto;
 import com.levi.easy_delivery.web.dto.ClienteResponseDto;
+import com.levi.easy_delivery.web.dto.PageableDto;
 import com.levi.easy_delivery.web.dto.mapper.ClienteMapper;
+import com.levi.easy_delivery.web.dto.mapper.PageableMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,8 +48,8 @@ public class ClienteController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Page<Cliente>> getAll(Pageable pageable) {
-        Page<Cliente> clientes = clienteService.buscarTodos(pageable);
-        return ResponseEntity.ok(clientes);
+    public ResponseEntity<PageableDto> getAll(Pageable pageable) {
+        Page<ClienteProjection> clientes = clienteService.buscarTodos(pageable);
+        return ResponseEntity.ok(PageableMapper.toDto(clientes));
     }
 }
