@@ -56,13 +56,13 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario buscaPorUsername(String email) {
-        return usuarioRepository.findByUsername(email).orElseThrow(
+    public Usuario buscaPorEmail(String email) {
+        return usuarioRepository.findByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Usuáro com '%s' não encontrado!", email))
         );
     }
 
-    public Role buscarRolePorUsername(String email) {
-        return usuarioRepository.findRoleByUsername(email);
+    public Role buscarRolePorEmail(String email) {
+        return usuarioRepository.findRoleByEmail(email);
     }
 }
