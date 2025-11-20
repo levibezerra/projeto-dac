@@ -1,6 +1,7 @@
 package com.levi.easy_delivery.service;
 
 import com.levi.easy_delivery.entity.Usuario;
+import com.levi.easy_delivery.enums.Role;
 import com.levi.easy_delivery.exception.EntityNotFoundException;
 import com.levi.easy_delivery.exception.PasswordInvalidException;
 import com.levi.easy_delivery.exception.UsernameUniqueViolationException;
@@ -50,5 +51,15 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public List<Usuario> buscarTodos() {
         return usuarioRepository.findAll();
+    }
+
+    public Usuario buscaPorUsername(String email) {
+        return usuarioRepository.findByUsername(email).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Usuáro com '%s' não encontrado!", email))
+        );
+    }
+
+    public Role buscarRolePorUsername(String email) {
+        return usuarioRepository.findRoleByUsername(email);
     }
 }
