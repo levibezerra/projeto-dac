@@ -3,7 +3,7 @@ package com.levi.easy_delivery.web.exception;
 import com.levi.easy_delivery.exception.CpfUniqueViolationException;
 import com.levi.easy_delivery.exception.EntityNotFoundException;
 import com.levi.easy_delivery.exception.PasswordInvalidException;
-import com.levi.easy_delivery.exception.UserNameUniqueViolationException;
+import com.levi.easy_delivery.exception.UsernameUniqueViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campo(s) invalido(s)", result));
     }
 
-    @ExceptionHandler({UserNameUniqueViolationException.class, CpfUniqueViolationException.class})
+    @ExceptionHandler({UsernameUniqueViolationException.class, CpfUniqueViolationException.class})
     public ResponseEntity<ErrorMessage> userNameUniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity

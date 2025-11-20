@@ -3,7 +3,7 @@ package com.levi.easy_delivery.service;
 import com.levi.easy_delivery.entity.Usuario;
 import com.levi.easy_delivery.exception.EntityNotFoundException;
 import com.levi.easy_delivery.exception.PasswordInvalidException;
-import com.levi.easy_delivery.exception.UserNameUniqueViolationException;
+import com.levi.easy_delivery.exception.UsernameUniqueViolationException;
 import com.levi.easy_delivery.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,7 +23,7 @@ public class UsuarioService {
         try {
             return usuarioRepository.save(usuario);
         } catch (DataIntegrityViolationException ex) {
-            throw new UserNameUniqueViolationException(String.format("E-mail {%s} já cadastrado!", usuario.getEmail()));
+            throw new UsernameUniqueViolationException(String.format("E-mail {%s} já cadastrado!", usuario.getEmail()));
         }
     }
 
