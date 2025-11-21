@@ -8,4 +8,6 @@ import java.util.List;
 public interface PratoRepository extends JpaRepository<Prato, Long> {
 
     List<Prato> findByCategoriaId(Long id);
+
+    void deleteByCategoriaId(Long id);
 }
