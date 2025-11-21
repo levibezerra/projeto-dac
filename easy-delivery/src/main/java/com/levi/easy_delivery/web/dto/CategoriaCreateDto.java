@@ -1,6 +1,7 @@
 package com.levi.easy_delivery.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,10 +15,10 @@ import lombok.Setter;
 
 public class CategoriaCreateDto {
 
-    @NotBlank
+    @NotNull
     @Size(min = 4, max = 100)
     private String nome;
-    @NotBlank
+    @NotNull
     @Size(max = 100)
     private String descricao;
 }

@@ -1,7 +1,7 @@
 package com.levi.easy_delivery.web.dto;
 
 import com.levi.easy_delivery.enums.StatusPedido;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,14 +16,8 @@ import java.math.BigDecimal;
 
 public class PedidoCreateDto {
 
-    @NotBlank
-    private BigDecimal valorTotal;
-    @NotBlank
+    @NotNull
     private String enderecoEntrega;
-    @NotBlank
-    private StatusPedido statusPedido;
-    @NotBlank
+    @NotNull
     private Long clienteId;
-    @NotBlank
-    private Long pagamentoId;
 }

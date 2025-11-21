@@ -35,7 +35,8 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
     }
 
-    @ExceptionHandler({EntityNotFoundException.class, CategoryNotFoundException.class, DishNotFoundException.class})
+    @ExceptionHandler({EntityNotFoundException.class, CategoryNotFoundException.class,
+            DishNotFoundException.class, PaymentNotFoundException.class})
     public ResponseEntity<ErrorMessage> entityNotFoundException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity

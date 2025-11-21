@@ -2,6 +2,7 @@ package com.levi.easy_delivery.web.dto;
 
 import com.levi.easy_delivery.enums.StatusDoPrato;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +21,12 @@ public class PratoCreateDto {
     private String nome;
     @NotBlank
     private String descricao;
-    @NotBlank
+    @NotNull
     private BigDecimal preco;
-    @NotBlank
+    @NotNull
     private String imagemUrl;
-    @NotBlank
+    @NotNull
     private StatusDoPrato statusDoPrato;
-    @NotBlank
+    @NotNull
     private Long categoriaId;
 }

@@ -1,6 +1,5 @@
 package com.levi.easy_delivery.web.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,14 +15,14 @@ import java.math.BigDecimal;
 
 public class ItemPedidoCreateDto {
 
-    @NotBlank
+    @NotNull
     private int quantidade;
-    @NotBlank
+    @NotNull
     private BigDecimal precoUnitario;
-    @NotBlank
+    @NotNull
     private BigDecimal subTotal;
-    @NotBlank
+    @NotNull
     private Long pratoId;
-    @NotBlank
+    @NotNull
     private Long pedidoId;
 }

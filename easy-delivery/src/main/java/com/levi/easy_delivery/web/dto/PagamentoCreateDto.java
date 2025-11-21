@@ -2,6 +2,7 @@ package com.levi.easy_delivery.web.dto;
 
 import com.levi.easy_delivery.enums.TipoDePagamento;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,10 @@ import java.math.BigDecimal;
 
 public class PagamentoCreateDto {
 
-    @NotBlank
+    @NotNull
     private BigDecimal valor;
-    @NotBlank
+    @NotNull
     private TipoDePagamento tipoDePagamento;
-    @NotBlank
+    @NotNull
     private Long pedidoId;
 }
