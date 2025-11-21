@@ -1,9 +1,6 @@
 package com.levi.easy_delivery.web.exception;
 
-import com.levi.easy_delivery.exception.CpfUniqueViolationException;
-import com.levi.easy_delivery.exception.EntityNotFoundException;
-import com.levi.easy_delivery.exception.PasswordInvalidException;
-import com.levi.easy_delivery.exception.UsernameUniqueViolationException;
+import com.levi.easy_delivery.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -38,7 +35,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler({EntityNotFoundException.class, CategoryNotFoundException.class})
     public ResponseEntity<ErrorMessage> entityNotFoundException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity

@@ -23,6 +23,7 @@ public class PratoCreateDto {
     private String descricao;
     @NotNull
     private BigDecimal preco;
+    @NotNull
     private String imagemUrl;
     @NotNull
     private StatusDoPrato statusDoPrato;

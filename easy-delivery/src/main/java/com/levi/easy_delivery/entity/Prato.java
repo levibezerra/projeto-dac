@@ -39,6 +39,7 @@ public class Prato {
     @Column(name = "imagem_do_prato")
     private String imagemUrl;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_do_prato", nullable = false)
     private StatusDoPrato status;
 
