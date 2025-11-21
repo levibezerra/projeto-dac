@@ -2,11 +2,10 @@ package com.levi.easy_delivery.service;
 
 import com.levi.easy_delivery.entity.Pagamento;
 import com.levi.easy_delivery.entity.Pedido;
-import com.levi.easy_delivery.entity.Prato;
 import com.levi.easy_delivery.enums.StatusPedido;
 import com.levi.easy_delivery.exception.PaymentNotFoundException;
 import com.levi.easy_delivery.exception.RequestNotFoundException;
-import com.levi.easy_delivery.exception.ValueNotFoundException;
+import com.levi.easy_delivery.exception.InvalidPaymentValueException;
 import com.levi.easy_delivery.repository.PagamentoRepository;
 import com.levi.easy_delivery.repository.PedidoRepository;
 import com.levi.easy_delivery.web.dto.PagamentoCreateDto;
@@ -29,9 +28,8 @@ public class PagamentoService {
                 () -> new RequestNotFoundException("Pedido não encontrado!"));
 
         if (pedido.getValorTotal().compareTo(createDto.getValor()) != 0) {
-            throw new ValueNotFoundException("Valor do pagamento diferente do valor do pedido!");
+            throw new InvalidPaymentValueException("Valor do pagamento diferente do valor do pedido!");
         }
-
         Pagamento pagamento = PagamentoMapper.toPagamento(createDto);
         pagamento.setPedido(pedido);
 

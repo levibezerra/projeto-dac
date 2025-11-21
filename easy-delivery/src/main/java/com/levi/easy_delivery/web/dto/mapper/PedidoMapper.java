@@ -17,7 +17,6 @@ public class PedidoMapper {
     public static PedidoResponseDto toDto(Pedido pedido) {
         PedidoResponseDto responseDto = new ModelMapper().map(pedido, PedidoResponseDto.class);
         responseDto.setClienteId(pedido.getCliente().getId());
-        responseDto.setPagamentoId(pedido.getPagamento().getId());
         return responseDto;
     }
 

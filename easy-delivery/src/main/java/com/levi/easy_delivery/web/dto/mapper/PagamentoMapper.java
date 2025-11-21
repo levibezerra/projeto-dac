@@ -11,12 +11,19 @@ import java.util.stream.Collectors;
 public class PagamentoMapper {
 
     public static Pagamento toPagamento(PagamentoCreateDto createDto) {
-        return new ModelMapper().map(createDto, Pagamento.class);
+       Pagamento pagamento = new Pagamento();
+       pagamento.setValor(createDto.getValor());
+       pagamento.setTipoDePagamento(createDto.getTipoDePagamento());
+       return pagamento;
     }
 
     public static PagamentoResponseDto toDto(Pagamento pagamento) {
-        PagamentoResponseDto responseDto = new ModelMapper().map(pagamento, PagamentoResponseDto.class);
+        PagamentoResponseDto responseDto = new PagamentoResponseDto();
+        responseDto.setId(pagamento.getId());
+        responseDto.setValor(pagamento.getValor());
+        responseDto.setTipoDePagamento(pagamento.getTipoDePagamento());
         responseDto.setPedidoId(pagamento.getPedido().getId());
+
         return responseDto;
     }
 

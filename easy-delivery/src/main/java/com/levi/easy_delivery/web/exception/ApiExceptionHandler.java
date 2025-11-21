@@ -26,7 +26,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campo(s) invalido(s)", result));
     }
 
-    @ExceptionHandler({UsernameUniqueViolationException.class, CpfUniqueViolationException.class})
+    @ExceptionHandler({UsernameUniqueViolationException.class, CpfUniqueViolationException.class, OrderAlreadyFinalizedException.class})
     public ResponseEntity<ErrorMessage> userNameUniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity
@@ -36,7 +36,8 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler({EntityNotFoundException.class, CategoryNotFoundException.class,
-            DishNotFoundException.class, PaymentNotFoundException.class})
+                        DishNotFoundException.class, PaymentNotFoundException.class, CustomerNotFoundException.class,
+                        RequestNotFoundException.class})
     public ResponseEntity<ErrorMessage> entityNotFoundException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity
@@ -45,7 +46,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
     }
 
-    @ExceptionHandler(PasswordInvalidException.class)
+    @ExceptionHandler({PasswordInvalidException.class, InvalidPaymentValueException.class})
     public ResponseEntity<ErrorMessage> passwordInvalidException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity

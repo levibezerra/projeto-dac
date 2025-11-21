@@ -20,5 +20,4 @@ public class PedidoResponseDto {
     private String enderecoEntrega;
     private StatusPedido statusPedido;
     private Long clienteId;
-    private Long pagamentoId;
 }
