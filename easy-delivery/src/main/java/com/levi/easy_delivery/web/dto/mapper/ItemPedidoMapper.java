@@ -15,11 +15,11 @@ public class ItemPedidoMapper {
     }
 
     public static ItemPedidoResponseDto toDto(ItemPedido itemPedido) {
-        ItemPedidoResponseDto itemPedidoResponseDto = new ModelMapper().map(itemPedido,
+        ItemPedidoResponseDto responseDto = new ModelMapper().map(itemPedido,
                 ItemPedidoResponseDto.class);
-        itemPedidoResponseDto.setPratoId(itemPedido.getPrato().getId());
-        itemPedidoResponseDto.setPedidoId(itemPedido.getPedido().getId());
-        return itemPedidoResponseDto;
+        responseDto.setPratoId(itemPedido.getPrato().getId());
+        responseDto.setPedidoId(itemPedido.getPedido().getId());
+        return responseDto;
     }
 
     public static List<ItemPedidoResponseDto> toListDto(List<ItemPedido> itemPedidos) {

@@ -15,10 +15,10 @@ public class PedidoMapper {
     }
 
     public static PedidoResponseDto toDto(Pedido pedido) {
-        PedidoResponseDto createDto = new ModelMapper().map(pedido, PedidoResponseDto.class);
-        createDto.setClienteId(pedido.getCliente().getId());
-        createDto.setPagamentoId(pedido.getPagamento().getId());
-        return createDto;
+        PedidoResponseDto responseDto = new ModelMapper().map(pedido, PedidoResponseDto.class);
+        responseDto.setClienteId(pedido.getCliente().getId());
+        responseDto.setPagamentoId(pedido.getPagamento().getId());
+        return responseDto;
     }
 
     public static List<PedidoResponseDto> toListDto(List<Pedido> pedidos) {
